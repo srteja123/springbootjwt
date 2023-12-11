@@ -8,11 +8,13 @@ public class JwtResponse {
   private Long id;
   private String email;
   private List<String> roles;
+  private Long loginCounter;
 
-  public JwtResponse(String accessToken, Long id, String email, List<String> roles) {
+  public JwtResponse(String accessToken, Long id, String email,Long loginCounter,  List<String> roles) {
     this.token = accessToken;
     this.id = id;
     this.email = email;
+    this.loginCounter = loginCounter;
     this.roles = roles;
   }
 
@@ -52,4 +54,13 @@ public class JwtResponse {
   public List<String> getRoles() {
     return roles;
   }
+
+  public Long getLoginCounter() {
+    return loginCounter;
+  }
+
+  public void setLoginCounter(Long loginCounter) {
+    this.loginCounter = loginCounter;
+  }
+  
 }

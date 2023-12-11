@@ -37,11 +37,17 @@ public class UserInfo {
     @Column(name="last_name",nullable=false)
     private String lastName;
 
-    @Column(name="account_Status" , nullable = false)
+    @Column(name="account_status" , nullable = true)
     private String accountStatus;
 
-    @Column(name="created_time" , nullable = false)
+    @Column(name="created_time" , nullable = true)
     private Date createdTime;
+
+     @Column(name="updated_time" , nullable = true)
+    private Date updatedTime;
+
+    @Column(name="login_counter" , nullable = false)
+    private Long loginCounter;
 
 
     public UserInfo(Long userId, String userType, String userEmail, String password, String firstName, String lastName,
@@ -121,6 +127,22 @@ public class UserInfo {
 
     public void setCreatedTime(Date createdTime) {
         this.createdTime = createdTime;
+    }
+
+    public Long getLoginCounter() {
+        return loginCounter;
+    }
+
+    public void setLoginCounter(Long loginCounter) {
+        this.loginCounter = loginCounter;
+    }
+
+    public Date getUpdatedTime() {
+        return updatedTime;
+    }
+
+    public void setUpdatedTime(Date updatedTime) {
+        this.updatedTime = updatedTime;
     }
 
 }

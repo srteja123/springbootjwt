@@ -22,14 +22,17 @@ public class UserDetailsImpl implements UserDetails {
   @JsonIgnore
   private String password;
 
+  private Long loginCounter;
+
   private Collection<? extends GrantedAuthority> authorities;
 
-  public UserDetailsImpl(Long id, String email, String password,
+  public UserDetailsImpl(Long id, String email, String password,Long loginCounter,
       Collection<? extends GrantedAuthority> authorities) {
     this.id = id;
     this.email = email;
     this.password = password;
     this.authorities = authorities;
+    this.loginCounter=loginCounter;
   }
 
   public static UserDetailsImpl build(UserInfo user) {
@@ -41,6 +44,7 @@ public class UserDetailsImpl implements UserDetails {
         user.getUserId(),  
         user.getUserEmail(),
         user.getPassword(), 
+        user.getLoginCounter(),
         authorities);
   }
 
@@ -55,6 +59,14 @@ public class UserDetailsImpl implements UserDetails {
 
   public String getEmail() {
     return email;
+  }
+
+  public Long getLoginCounter() {
+    return loginCounter;
+  }
+
+  public void setLoginCounter(Long loginCounter) {
+    this.loginCounter = loginCounter;
   }
 
   @Override

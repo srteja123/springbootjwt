@@ -6,6 +6,7 @@ public class RegisterRequest {
     private String firstName;
     private String lastName;
     private String password;
+    private String accountStatus;
     public String getEmailId() {
         return emailId;
     }
@@ -29,6 +30,12 @@ public class RegisterRequest {
     }
     public void setPassword(String password) {
         this.password = password;
+    }
+    public String getAccountStatus() {
+        return accountStatus;
+    }
+    public void setAccountStatus(String accountStatus) {
+        this.accountStatus = accountStatus;
     }
     
 

@@ -4,6 +4,8 @@ public class LoginRequest {
     private String emailId;
     private String password;
     private Long userId;
+    private String userType;
+    
     public String getEmailId() {
         return emailId;
     }
@@ -21,6 +23,12 @@ public class LoginRequest {
     }
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+    public String getUserType() {
+        return userType;
+    }
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
     
     

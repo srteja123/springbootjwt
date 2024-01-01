@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.MessageResponse;
 import com.example.demo.dto.RegisterRequest;
-import com.example.demo.model.UserInfo;
+import com.example.demo.entity.UserInfo;
 import com.example.demo.repository.UserRepository;
-
+//Below code used for registering the user and also to validate if the registered email already exists in the DB
 @RestController
 @RequestMapping("/user")
 @CrossOrigin
@@ -25,9 +25,10 @@ public class Register {
     private UserRepository pre_signup_query;
     
     @PostMapping("/register")
-    public ResponseEntity<Object> create_account(@RequestBody RegisterRequest request){ 
+    public ResponseEntity<Object> create_account(@RequestBody RegisterRequest request){
+        try{
        //Code to be written to check if duplicate email Id is present
-            if(pre_signup_query.existsByUserEmail(request.getEmailId())){
+            if(pre_signup_query.existsByEmailId(request.getEmailId())){
                 return ResponseEntity
                 .badRequest()
                 .body(new MessageResponse("Error: Email is already in use!"));
@@ -37,23 +38,18 @@ public class Register {
                     UserInfo create_record = new UserInfo();
                     create_record.setFirstName(request.getFirstName());
                     create_record.setLastName(request.getLastName());
-                    create_record.setUserEmail(request.getEmailId());
+                    create_record.setEmailId(request.getEmailId());
                     create_record.setUserType("USER");
                     create_record.setPassword(hashed_password);
                     create_record.setAccountStatus("ACTIVE");
+                    create_record.setLoginCounter(0L);
                     create_record.setCreatedTime(presentTime);
                     pre_signup_query.save(create_record);
-
-                    //After successful registration redirect to login page
+                    return ResponseEntity.ok(new MessageResponse("Registration is successful"));
             }
-            return null;
-
-                  //  validateRequest.put("status", "success");
-                  //  validateRequest.put("message", "User Registration was successful");
-                    //return ResponseEntity.status(HttpStatus.OK).body(validateRequest);
-                
-            
-        
+        }catch(Exception e){
+            return ResponseEntity.ok("CATCH OUT Register" + e.getMessage());
+        }
     }
     
 }

@@ -9,7 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.example.demo.model.UserInfo;
+import com.example.demo.entity.UserInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class UserDetailsImpl implements UserDetails {
@@ -21,18 +21,23 @@ public class UserDetailsImpl implements UserDetails {
 
   @JsonIgnore
   private String password;
-
+ 
   private Long loginCounter;
+
+  private String accountStatus;
 
   private Collection<? extends GrantedAuthority> authorities;
 
-  public UserDetailsImpl(Long id, String email, String password,Long loginCounter,
+  
+
+  public UserDetailsImpl(Long id, String email, String password, Long loginCounter, String accountStatus,
       Collection<? extends GrantedAuthority> authorities) {
     this.id = id;
     this.email = email;
     this.password = password;
+    this.loginCounter = loginCounter;
+    this.accountStatus = accountStatus;
     this.authorities = authorities;
-    this.loginCounter=loginCounter;
   }
 
   public static UserDetailsImpl build(UserInfo user) {
@@ -42,9 +47,10 @@ public class UserDetailsImpl implements UserDetails {
 
     return new UserDetailsImpl(
         user.getUserId(),  
-        user.getUserEmail(),
+        user.getEmailId(),
         user.getPassword(), 
         user.getLoginCounter(),
+        user.getAccountStatus(),
         authorities);
   }
 
@@ -109,6 +115,14 @@ public class UserDetailsImpl implements UserDetails {
 public String getUsername() {
     // TODO Auto-generated method stub
     return email;
+}
+
+public String getAccountStatus() {
+  return accountStatus;
+}
+
+public void setAccountStatus(String accountStatus) {
+  this.accountStatus = accountStatus;
 }
 
 }

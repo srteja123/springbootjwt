@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
 @Table(name="user_info")
 public class UserInfo {
 
-    private static final long serialVersionUID = 1L;
+   // private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -26,7 +26,7 @@ public class UserInfo {
     private String userType;
 
     @Column(name="user_email",nullable = false,unique = true)
-    private String userEmail;
+    private String emailId;
 
     @Column(name="password",nullable = false)
     private String password;
@@ -46,15 +46,15 @@ public class UserInfo {
      @Column(name="updated_time" , nullable = true)
     private Date updatedTime;
 
-    @Column(name="login_counter" , nullable = false)
+    @Column(name="login_counter" , nullable = true)
     private Long loginCounter;
 
 
-    public UserInfo(Long userId, String userType, String userEmail, String password, String firstName, String lastName,
+    public UserInfo(Long userId, String userType, String emailId, String password, String firstName, String lastName,
             String accountStatus, Date createdTime) {
         this.userId = userId;
         this.userType = userType;
-        this.userEmail = userEmail;
+        this.emailId = emailId;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -81,12 +81,12 @@ public class UserInfo {
         this.userType = userType;
     }
 
-    public String getUserEmail() {
-        return userEmail;
+    public String getEmailId() {
+        return emailId;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
     }
 
     public String getPassword() {
@@ -121,7 +121,7 @@ public class UserInfo {
         this.accountStatus = accountStatus;
     }
 
-       public Date getCreatedTime() {
+    public Date getCreatedTime() {
         return createdTime;
     }
 

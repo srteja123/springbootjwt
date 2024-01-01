@@ -41,7 +41,7 @@ public class Register {
                     create_record.setEmailId(request.getEmailId());
                     create_record.setUserType("USER");
                     create_record.setPassword(hashed_password);
-                    create_record.setAccountStatus("ACTIVE");
+                    create_record.setAccountStatus(request.getAccountStatus());
                     create_record.setLoginCounter(0L);
                     create_record.setCreatedTime(presentTime);
                     pre_signup_query.save(create_record);
